@@ -1,10 +1,106 @@
-<DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
+
 <head>
-    <title>My First HTML Document</title>
+  <title>Australian Shark Attacks</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <style>
+    body {
+      font-family: Arial;
+      margin: 40px;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    #map {
+      width: 800px;
+      margin: auto;
+    }
+  </style>
 </head>
+
 <body>
-    <h1>Heading 1</h1>
-    <p>My first paragraph. </p>
-</body>    
-</DOCTYPE>
+
+  <h1>Shark Attacks by Australian State</h1>
+
+  <div id="map"></div>
+
+  <script>
+
+    const spec = {
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+      "width": 800,
+      "height": 500,
+
+      "title": "Australian Shark Attacks by State",
+
+      "projection": {
+        "type": "mercator"
+      },
+
+      "data": {
+        "url": "australia.geojson",
+        "format": {
+          "type": "geojson"
+        }
+      },
+
+      "transform": [
+        {
+          "lookup": "properties.STATE_NAME",
+          "from": {
+            "data": {
+              "url": "shark_state.csv"
+            },
+            "key": "state",
+            "fields": ["attacks"]
+          }
+        }
+      ],
+
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white"
+      },
+
+      "encoding": {
+
+        "color": {
+          "field": "attacks",
+          "type": "quantitative",
+          "title": "Number of Shark Attacks",
+          "scale": {
+            "scheme": "blues"
+          }
+        },
+
+        "tooltip": [
+          {
+            "field": "properties.STATE_NAME",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "attacks",
+            "type": "quantitative",
+            "title": "Attacks"
+          }
+        ]
+      }
+    };
+
+    vegaEmbed('#map', spec);
+
+  </script>
+
+</body>
+
+</html>
