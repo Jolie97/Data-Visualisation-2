@@ -20,13 +20,13 @@
   <div id="map"></div>
   <script>
     const sharkData = [
-      {"state": "New South Wales", "attacks": 437},
-      {"state": "Queensland", "attacks": 370},
-      {"state": "Western Australia", "attacks": 198},
-      {"state": "South Australia", "attacks": 73},
-      {"state": "Victoria", "attacks": 70},
-      {"state": "Tasmania", "attacks": 27},
-      {"state": "Northern Territory", "attacks": 19}
+      {"id": 0, "state": "New South Wales", "attacks": 437},
+      {"id": 1, "state": "Queensland", "attacks": 370},
+      {"id": 2, "state": "Western Australia", "attacks": 198},
+      {"id": 3, "state": "South Australia", "attacks": 73},
+      {"id": 4, "state": "Victoria", "attacks": 70},
+      {"id": 5, "state": "Tasmania", "attacks": 27},
+      {"id": 6, "state": "Northern Territory", "attacks": 19}
     ];
 
     const spec = {
@@ -41,11 +41,11 @@
       },
       "transform": [
         {
-          "lookup": "properties.STATE_NAME",
+          "lookup": "id",
           "from": {
             "data": { "values": sharkData },
-            "key": "state",
-            "fields": ["attacks"]
+            "key": "id",
+            "fields": ["state", "attacks"]
           }
         }
       ],
@@ -58,7 +58,7 @@
           "scale": { "scheme": "blues" }
         },
         "tooltip": [
-          { "field": "properties.STATE_NAME", "type": "nominal", "title": "State" },
+          { "field": "state", "type": "nominal", "title": "State" },
           { "field": "attacks", "type": "quantitative", "title": "Attacks" }
         ]
       }
