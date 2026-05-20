@@ -138,49 +138,27 @@
       {"activity": "Unmotorised Boating", "attacks": 31},
       {"activity": "Standing In Water", "attacks": 24}
     ];
-
+  
     const lolliSpec = {
       "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
       "width": 600,
       "height": 350,
-      "title": {
-        "text": "What were victims doing when attacked?",
-        "fontSize": 16
-      },
+      "title": { "text": "What were victims doing when attacked?", "fontSize": 16 },
       "data": { "values": lolliData },
       "layer": [
         {
           "mark": { "type": "rule", "color": "#aaaaaa", "strokeWidth": 2 },
           "encoding": {
-            "y": {
-              "field": "activity",
-              "type": "nominal",
-              "sort": "-x",
-              "title": null
-            },
-            "x": {
-              "value": 0
-            },
-            "x2": {
-              "field": "attacks",
-              "type": "quantitative"
-            }
+            "y": { "field": "activity", "type": "nominal", "sort": "-x", "title": null },
+            "x": { "field": "attacks", "type": "quantitative" },
+            "x2": { "value": 0 }
           }
         },
         {
           "mark": { "type": "point", "filled": true, "color": "#4878a8", "size": 150 },
           "encoding": {
-            "y": {
-              "field": "activity",
-              "type": "nominal",
-              "sort": "-x",
-              "title": null
-            },
-            "x": {
-              "field": "attacks",
-              "type": "quantitative",
-              "title": "Number of Attacks"
-            },
+            "y": { "field": "activity", "type": "nominal", "sort": "-x", "title": null },
+            "x": { "field": "attacks", "type": "quantitative", "title": "Number of Attacks" },
             "tooltip": [
               { "field": "activity", "type": "nominal", "title": "Activity" },
               { "field": "attacks", "type": "quantitative", "title": "Attacks" }
@@ -190,15 +168,8 @@
         {
           "mark": { "type": "text", "color": "white", "fontSize": 11, "fontWeight": "bold" },
           "encoding": {
-            "y": {
-              "field": "activity",
-              "type": "nominal",
-              "sort": "-x"
-            },
-            "x": {
-              "field": "attacks",
-              "type": "quantitative"
-            },
+            "y": { "field": "activity", "type": "nominal", "sort": "-x" },
+            "x": { "field": "attacks", "type": "quantitative" },
             "text": { "field": "attacks", "type": "quantitative" }
           }
         }
