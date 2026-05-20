@@ -30,6 +30,9 @@
       },
       "transform": [
         {
+          "filter": "datum.properties != null && datum.properties.STATE_NAME != null"
+        },
+        {
           "calculate": "datum.properties.STATE_NAME",
           "as": "state_name"
         },
