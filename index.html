@@ -19,6 +19,16 @@
   <h1>Australian Shark Attacks by State</h1>
   <div id="map"></div>
   <script>
+    const sharkData = [
+      {"state": "New South Wales", "attacks": 437},
+      {"state": "Queensland", "attacks": 370},
+      {"state": "Western Australia", "attacks": 198},
+      {"state": "South Australia", "attacks": 73},
+      {"state": "Victoria", "attacks": 70},
+      {"state": "Tasmania", "attacks": 27},
+      {"state": "Northern Territory", "attacks": 19}
+    ];
+
     const spec = {
       "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
       "width": 800,
@@ -39,10 +49,7 @@
         {
           "lookup": "state_name",
           "from": {
-            "data": {
-              "url": "https://raw.githubusercontent.com/Jolie97/Data-Visualisation-2/main/shark_state.csv",
-              "format": { "type": "csv", "parse": { "attacks": "number" } }
-            },
+            "data": { "values": sharkData },
             "key": "state",
             "fields": ["attacks"]
           }
@@ -54,11 +61,7 @@
           "field": "attacks",
           "type": "quantitative",
           "title": "Number of Shark Attacks",
-          "scale": { "scheme": "blues" },
-          "condition": {
-            "test": "!isValid(datum.attacks)",
-            "value": "#lightgray"
-          }
+          "scale": { "scheme": "blues" }
         },
         "tooltip": [
           { "field": "state_name", "type": "nominal", "title": "State" },
