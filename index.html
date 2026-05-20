@@ -28,7 +28,7 @@
 
 <body>
 
-  <h1>Shark Attacks by Australian State</h1>
+  <h1>Australian Shark Attacks by State</h1>
 
   <div id="map"></div>
 
@@ -43,7 +43,13 @@
       "title": "Australian Shark Attacks by State",
 
       "projection": {
-        "type": "mercator"
+        "type": "mercator",
+        "fit": {
+          "data": {
+            "url": "https://raw.githubusercontent.com/Jolie97/Data-Visualisation-2/main/australia.geojson",
+            "format": { "type": "geojson" }
+          }
+        }
       },
 
       "data": {
@@ -58,7 +64,7 @@
           "lookup": "properties.STATE_NAME",
           "from": {
             "data": {
-              "url": "https://raw.githubusercontent.com/Jolie97/Data-Visualisation-2/main/shark_state.csv"
+              "url": "shark_state.csv"
             },
             "key": "state",
             "fields": ["attacks"]
@@ -101,5 +107,4 @@
   </script>
 
 </body>
-
 </html>
