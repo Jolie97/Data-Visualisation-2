@@ -31,7 +31,11 @@
       },
       "transform": [
         {
-          "lookup": "properties.STATE_NAME",
+          "calculate": "datum.properties.STATE_NAME",
+          "as": "state_name"
+        },
+        {
+          "lookup": "state_name",
           "from": {
             "data": {
               "url": "https://raw.githubusercontent.com/Jolie97/Data-Visualisation-2/main/shark_state.csv"
@@ -50,7 +54,7 @@
           "scale": { "scheme": "blues" }
         },
         "tooltip": [
-          { "field": "properties.STATE_NAME", "type": "nominal", "title": "State" },
+          { "field": "state_name", "type": "nominal", "title": "State" },
           { "field": "attacks", "type": "quantitative", "title": "Attacks" }
         ]
       }
