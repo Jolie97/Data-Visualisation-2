@@ -176,6 +176,82 @@
       ]
     };
     vegaEmbed('#lollipop', lolliSpec);
+const dumbbellData = [
+    {"body_part": "Leg", "type": "Non Fatal", "attacks": 450},
+    {"body_part": "Leg", "type": "Fatal", "attacks": 85},
+    {"body_part": "Other", "type": "Non Fatal", "attacks": 270},
+    {"body_part": "Other", "type": "Fatal", "attacks": 80},
+    {"body_part": "Torso", "type": "Non Fatal", "attacks": 75},
+    {"body_part": "Torso", "type": "Fatal", "attacks": 75},
+    {"body_part": "Arm", "type": "Non Fatal", "attacks": 140},
+    {"body_part": "Arm", "type": "Fatal", "attacks": 10},
+    {"body_part": "Head", "type": "Non Fatal", "attacks": 10},
+    {"body_part": "Head", "type": "Fatal", "attacks": 2}
+  ];
+  
+  const dumbbellSpec = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 600,
+    "height": 350,
+    "title": {
+      "text": "Fatal vs Non Fatal attacks by body part attacked",
+      "fontSize": 16
+    },
+    "data": { "values": dumbbellData },
+    "layer": [
+      {
+        "transform": [
+          {
+            "pivot": "type",
+            "value": "attacks",
+            "groupby": ["body_part"]
+          }
+        ],
+        "mark": { "type": "rule", "color": "#aaaaaa", "strokeWidth": 2 },
+        "encoding": {
+          "y": {
+            "field": "body_part",
+            "type": "nominal",
+            "sort": "-x",
+            "title": null
+          },
+          "x": { "field": "Non Fatal", "type": "quantitative" },
+          "x2": { "field": "Fatal" }
+        }
+      },
+      {
+        "mark": { "type": "point", "filled": true, "size": 150 },
+        "encoding": {
+          "y": {
+            "field": "body_part",
+            "type": "nominal",
+            "sort": "-x",
+            "title": null
+          },
+          "x": {
+            "field": "attacks",
+            "type": "quantitative",
+            "title": "Number of Attacks"
+          },
+          "color": {
+            "field": "type",
+            "type": "nominal",
+            "title": "Attack Type",
+            "scale": {
+              "domain": ["Non Fatal", "Fatal"],
+              "range": ["#2166ac", "#d73027"]
+            }
+          },
+          "tooltip": [
+            { "field": "body_part", "type": "nominal", "title": "Body Part" },
+            { "field": "type", "type": "nominal", "title": "Type" },
+            { "field": "attacks", "type": "quantitative", "title": "Attacks" }
+          ]
+        }
+      }
+    ]
+  };
+  vegaEmbed('#dumbbell', dumbbellSpec);
   </script>
 </body>
 </html>
