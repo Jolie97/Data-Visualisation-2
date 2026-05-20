@@ -40,7 +40,8 @@
           "lookup": "state_name",
           "from": {
             "data": {
-              "url": "https://raw.githubusercontent.com/Jolie97/Data-Visualisation-2/main/shark_state.csv"
+              "url": "https://raw.githubusercontent.com/Jolie97/Data-Visualisation-2/main/shark_state.csv",
+              "format": { "type": "csv", "parse": { "attacks": "number" } }
             },
             "key": "state",
             "fields": ["attacks"]
@@ -53,7 +54,11 @@
           "field": "attacks",
           "type": "quantitative",
           "title": "Number of Shark Attacks",
-          "scale": { "scheme": "blues" }
+          "scale": { "scheme": "blues" },
+          "condition": {
+            "test": "!isValid(datum.attacks)",
+            "value": "#lightgray"
+          }
         },
         "tooltip": [
           { "field": "state_name", "type": "nominal", "title": "State" },
